@@ -1,0 +1,996 @@
+:root {
+  --g: #e2e2e2;
+  --b: #0000ff;
+  --bordy: 5vmin;
+  --bordx: 5vmin;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--g);
+  font-family: "JetBrains Mono";
+  font-weight: 300;
+}
+
+h1, h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+h3, h4 {
+  text-transform: uppercase;
+  font-family: "JetBrains Mono";
+  font-weight: 800;
+}
+
+#frame {
+  position: fixed;
+  inset: var(--bordy) var(--bordx);
+  overflow: hidden;
+  clip-path: inset(0);
+  border: 1px solid #000;
+}
+
+#scroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: clamp(.5rem, 2vw, 2.5rem);   /* rétrécit l'espace logo/nav sur petit écran */
+  background: var(--b);
+  padding: clamp(.5rem, 2vw, 2rem);
+}
+
+#logo {
+  display: flex;
+  align-items: center;
+  gap: .4em;
+  flex-shrink: 0;                    /* le logo ne se compresse jamais en dessous de sa taille naturelle */
+  color: white;
+  font-weight: 900;
+  font-size: clamp(.7rem, 2.8vw, 1.25rem);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+#logo::before {
+  content: "";
+  display: block;
+  width: .75em;
+  height: .75em;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+nav {
+  display: flex;
+  gap: clamp(0rem, .5vw, .25rem);
+  min-width: 0;      /* autorise nav à se réduire (rappel : sans ça, flex refuse de compresser en dessous du contenu) */
+}
+
+nav a {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: block;
+  padding: clamp(.4rem, 1.5vw, .8rem) clamp(.5rem, 2vw, 1.1rem);
+  border: 1px solid transparent;
+  color: white;
+  text-decoration: none;
+  font-size: clamp(.6rem, 2vw, .85rem);
+  letter-spacing: .02em;
+  white-space: nowrap;    /* empêche "Présentation" de se couper sur 2 lignes */
+  transition: color .3s;
+}
+
+/* Le rectangle blanc qui glisse au survol */
+nav a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: #fff;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .35s ease;
+}
+nav a:hover, nav a:focus-visible {
+  color: var(--b);
+}
+nav a:hover::before, nav a:focus-visible::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Lien de la section actuellement affichée : juste une bordure blanche */
+nav a[aria-current="true"] {
+  border-color: white;
+}
+
+section#presentation {
+  position: relative;      /* nécessaire pour positionner le grand "//" et les formes en absolute */
+  overflow: hidden;         /* empêche le grand "//" de déborder visuellement de la section */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem clamp(1rem, 4vw, 3rem) 0;
+}
+
+/* Badge "En Recherche d'Alternance" */
+section#presentation > div:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  align-self: flex-start;
+  border: 1px solid #000;
+  padding: .9rem .9rem;
+  font-size: clamp(.75rem, 2.5vw, .95rem);
+}
+
+.dot {
+  width: .55em;
+  height: .55em;
+  background-color: var(--b);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+h1 {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(2.2rem, 12vw, 4.5rem);
+  line-height: 1;
+  margin: 0;
+}
+
+/* Le grand // derrière la photo */
+.deco {
+  position: absolute;
+  z-index: 0;
+  right: 10vw;
+  top: 56%;
+  transform: translateY(-50%);
+  font-family: 'JetBrains Mono';
+  font-weight: 800;
+  font-size: 65vw;
+  line-height: 1;
+  color: var(--b);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Curseur clignotant après le nom, en CSS pur */
+.cursor {
+  display: inline-block;
+  width: .3em;
+  height: .8em;
+  margin-left: .2em;
+  background: var(--b);
+  vertical-align: -.05em;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Sous-titre */
+section#presentation > div:nth-child(3) {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: .3rem;
+  font-size: clamp(.9rem, 3vw, 1.2rem);
+}
+
+section#presentation > div:nth-child(3) p { 
+  margin: 0; 
+}
+
+/* Boutons */
+section#presentation > div:nth-child(4) {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+section#presentation > div:nth-child(4) a {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: .9rem 1.6rem;
+  border: 1px solid var(--b);
+  text-decoration: none;
+  font-size: .85rem;
+  letter-spacing: .05em;
+  transition: color .3s;
+}
+
+section#presentation > div:nth-child(4) a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .35s ease;
+}
+
+/* Bouton plein : "Télécharger le CV" */
+section#presentation > div:nth-child(4) a:first-child {
+  background: var(--b);
+  color: #fff;
+}
+
+section#presentation > div:nth-child(4) a:first-child::before { 
+  background: var(--g); 
+}
+
+section#presentation > div:nth-child(4) a:first-child:hover, section#presentation > div:nth-child(4) a:first-child:focus-visible { 
+  color: #000; 
+}
+
+section#presentation > div:nth-child(4) a:first-child:hover::before, section#presentation > div:nth-child(4) a:first-child:focus-visible::before { 
+  transform: scaleX(1); transform-origin: left; 
+}
+
+/* Bouton contour : "Me contacter" */
+section#presentation > div:nth-child(4) a:last-child {
+  color: #000;
+}
+
+section#presentation > div:nth-child(4) a:last-child::before { 
+  background: var(--b); 
+}
+
+section#presentation > div:nth-child(4) a:last-child:hover, section#presentation > div:nth-child(4) a:last-child:focus-visible { 
+  color: #fff; 
+}
+
+section#presentation > div:nth-child(4) a:last-child:hover::before, section#presentation > div:nth-child(4) a:last-child:focus-visible::before { 
+  transform: scaleX(1); transform-origin: left; 
+}
+
+.hero-bottom-group {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% + 2 * clamp(1rem, 4vw, 3rem));
+  margin-left: calc(-1 * clamp(1rem, 4vw, 3rem));
+  margin-bottom: -1px;
+}
+
+/* Conteneur global Image + // arrière-plan */
+.hero-img-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.hero-img-container img {
+  position: relative;
+  z-index: 2;
+  max-width: 75%;
+  height: auto;
+  display: block;
+  margin-bottom: -1px;
+}
+
+/* BANDEAU DE COMPÉTENCES DÉFILANT */
+.skills-banner {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  overflow: hidden;
+  background: var(--g);
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  padding: 1rem 0;
+  white-space: nowrap;
+}
+
+.skills-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-banner 15s linear infinite; 
+}
+
+.skills-group {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.skills-group > span {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: .9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+/* On décale de -50% car 4 groupes (50% correspond exactement au milieu de 4 blocs identiques) */
+@keyframes scroll-banner {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.skills-banner:hover .skills-track {
+  animation-play-state: paused;
+}
+
+section#competences {
+  position: relative;
+  overflow: hidden;
+  padding: 3rem clamp(1rem, 4vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Titre H2 avec rectangle bleu clignotant / fixe comme sur la maquette */
+section#competences h2 {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(2rem, 8vw, 4rem);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+/* Grand // bleu en fond de section */
+.deco-competences {
+  position: absolute;
+  z-index: 0;
+  right: -5vw;
+  bottom: -10vw;
+  font-family: 'JetBrains Mono';
+  font-weight: 800;
+  font-size: clamp(20rem, 55vw, 65rem);
+  color: var(--b);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Grille de cartes responsive */
+.skills-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Style individuel des cartes (fond gris, bordure noire) */
+.skill-card {
+  background: var(--g);
+  border: 1px solid #000;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+}
+
+.skill-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #000;
+}
+
+.skill-card h4 {
+  margin: 0;
+  font-size: .85rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.skill-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.skill-card li {
+  font-size: .9rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.skill-card li span {
+  color: var(--b);
+  font-weight: 800;
+}
+
+section#parcours {
+  position: relative;
+  overflow: hidden;
+  padding: 3rem clamp(1rem, 4vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+section#parcours h2 {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(2rem, 8vw, 4rem);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+/* Grand // bleu en fond (exactement identiques aux compétences) */
+.deco-parcours {
+  position: absolute;
+  z-index: 0;
+  right: -5vw;
+  bottom: -10vw;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 800;
+  font-size: clamp(20rem, 55vw, 65rem);
+  color: var(--b);
+  opacity: 10%;
+  pointer-events: none;
+  user-select: none;
+}
+
+.parcours-intro {
+  position: relative;
+  z-index: 2;
+  max-width: 750px;
+  font-size: clamp(.9rem, 2vw, 1.05rem);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.parcours-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.parcours-column h3 {
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  letter-spacing: .05em;
+}
+
+/* Timeline verticale discrète */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border-left: 1px solid var(--b);
+  padding-left: 1rem;
+}
+
+.timeline-item {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+
+/* Carré bleu + date */
+.timeline-date {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-size: .85rem;
+  color: #555;
+}
+
+.blue-square {
+  width: .65em;
+  height: .65em;
+  background-color: var(--b);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.timeline-item h4 {
+  margin: 0;
+  font-size: standard;
+  font-size: .95rem;
+  line-height: 1.3;
+  color: #000;
+}
+
+.timeline-item p {
+  margin: 0;
+  font-size: .85rem;
+  line-height: 1.4;
+  color: #333;
+}
+
+section#projets {
+  position: relative;
+  overflow: hidden;
+  padding: 3rem clamp(1rem, 4vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+section#projets h2 {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(2rem, 8vw, 4rem);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+/* Grand // bleu en fond de section */
+.deco-projets {
+  position: absolute;
+  z-index: 0;
+  right: 2vw;
+  bottom: -10vw;
+  font-family: 'JetBrains Mono';
+  font-weight: 800;
+  font-size: clamp(20rem, 40vw, 65rem);
+  color: var(--b);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Ligne de séparation avec texte centré */
+.projects-divider {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #555;
+  font-size: .9rem;
+}
+
+.projects-divider::before,
+.projects-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #999;
+}
+
+.projects-divider span {
+  padding: 0 1rem;
+}
+
+/* Grille de projets */
+.projects-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Cartes de projet */
+.project-card {
+  background: var(--g);
+  border: 1px solid #000;
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
+
+.project-card h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #000;
+  letter-spacing: .02em;
+}
+
+.project-card p {
+  margin: 0;
+  font-size: .9rem;
+  line-height: 1.5;
+  color: #222;
+}
+
+.project-tags {
+  font-size: .8rem;
+  color: var(--b);
+  font-weight: 500;
+}
+
+section#contact {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--b);
+  color: #fff;
+  padding: 3rem clamp(1rem, 4vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+section#contact h2 {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(2rem, 8vw, 4rem);
+  margin: 0;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+/* Curseur blanc pour le titre contact */
+.cursor-white {
+  background: #fff;
+}
+
+/* Grand // blanc décoratif en fond */
+.deco-contact {
+  position: absolute;
+  z-index: 0;
+  right: -5vw;
+  bottom: -15vw;
+  font-family: 'JetBrains Mono';
+  font-weight: 800;
+  font-size: clamp(25rem, 50vw, 60rem);
+  color: #fff;
+  line-height: .8;
+  opacity: 30%;
+  pointer-events: none;
+  user-select: none;
+}
+
+.contact-intro {
+  position: relative;
+  z-index: 2;
+  max-width: 750px;
+  font-size: clamp(.9rem, 2vw, 1.05rem);
+  line-height: 1.5;
+  margin: 0;
+  color: #fff;
+}
+
+/* Formulaire */
+.contact-form {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 650px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.form-group label {
+  font-size: .85rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  padding: .8rem 1rem;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .9rem;
+  outline: none;
+  transition: border-color .3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #fff;
+}
+
+/* Bouton Envoyer */
+.btn-submit {
+  align-self: flex-start;
+  background: #fff;
+  color: var(--b);
+  border: none;
+  padding: .8rem 1.8rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: .85rem;
+  cursor: pointer;
+  transition: opacity .3s;
+}
+
+.btn-submit:hover {
+  opacity: .9;
+}
+
+/* Liens du bas */
+.contact-links {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn-submit,
+.btn-link {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: .85rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  transition: color .3s;
+  cursor: pointer;
+}
+
+.btn-submit::before,
+.btn-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .35s ease;
+}
+
+.btn-submit:hover::before,
+.btn-submit:focus-visible::before,
+.btn-link:hover::before,
+.btn-link:focus-visible::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* 1. Bouton "ENVOYER" & Bouton plein "TÉLÉCHARGER LE CV" */
+.btn-submit,
+.btn-link.fill {
+  background: #fff;
+  color: var(--b);
+  border: 1px solid #fff;
+  padding: .8rem 1.8rem;
+}
+
+.btn-submit::before,
+.btn-link.fill::before {
+  background: var(--b);
+}
+
+.btn-submit:hover,
+.btn-submit:focus-visible,
+.btn-link.fill:hover,
+.btn-link.fill:focus-visible {
+  color: #fff;
+}
+
+/* 2. Boutons contours "LINKEDIN" & "GITHUB" */
+.contact-links {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn-link.outline {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  padding: .8rem 1.4rem;
+}
+
+.btn-link.outline::before {
+  background: #fff;
+}
+
+.btn-link.outline:hover,
+.btn-link.outline:focus-visible {
+  color: var(--b);
+  border-color: #fff;
+}
+
+footer {
+  position: fixed;
+  bottom: calc(var(--bordy) / 2);
+  left: 50%;
+  transform: translate(-50%, 50%);
+  z-index: 30;
+  margin: 0;
+  padding: 0;
+}
+
+footer p {
+  margin: 0;
+  font-size: clamp(.7rem, 1.5vw, .85rem);
+  color: #000;
+  white-space: nowrap;
+}
+
+@media (min-width: 900px) { /* pour les écrans plus grand */
+  :root {
+    --bordy: 8vmin;
+    --bordx: 8vmin;
+  }
+
+  #frame {
+    border-color: #666;
+  }
+
+  nav {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  header {
+    margin-top: 2vw;
+    margin-left: 2vw;
+    margin-right: 2vw;
+  }
+
+  #logo::before {
+    transition: transform .4s ease;
+  }
+
+  #logo:hover::before, #logo:focus-visible::before {
+    transform: rotate(90deg);
+  }
+
+  section#presentation {
+    justify-content: center;
+    min-height: 75vh;
+    padding: 0rem clamp(2rem, 5vw, 4rem) 0;
+  }
+
+  /* Forcer le H1 sur 1 seule ligne avec une taille ajustée */
+  section#presentation h1 {
+    font-size: clamp(2rem, 5vw, 4.2rem);
+    white-space: nowrap;
+    max-width: 60%;
+  }
+
+  section#presentation > div:first-child,
+  section#presentation > div:nth-child(3),
+  section#presentation > div:nth-child(4) {
+    max-width: 55%;
+  }
+
+  .hero-bottom-group {
+    display: contents;
+  }
+
+  /* Conteneur global Image + // arrière-plan */
+  .hero-img-container {
+    position: absolute;
+    bottom: 5vw;
+    top: auto;
+    right: 0vw;        
+    transform: none;
+    width: auto;
+    height: 90%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .hero-img-container img {
+    position: relative;
+    z-index: 2;
+    height: clamp(380px, 62vh, 580px); 
+    width: auto;
+    max-width: none;
+    object-fit: contain;
+    margin-bottom: -1rem;
+  }
+
+  .deco {
+    position: absolute;
+    z-index: 1;
+    right: 0vw;
+    bottom: 0;
+    top: auto;
+    transform: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 800;
+    font-size: clamp(25rem, 41vw, 48rem);
+    line-height: 0.8;
+    color: var(--b);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .skills-banner {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 10;
+  }
+
+  section#competences {
+    padding: 4rem clamp(2rem, 5vw, 4rem);
+    min-height: 80vh;
+    justify-content: center;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  section#parcours {
+    padding: 4rem clamp(2rem, 5vw, 4rem);
+    min-height: 80vh;
+    justify-content: center;
+  }
+
+  .parcours-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+
+  section#projets {
+    padding: 4rem clamp(2rem, 5vw, 4rem);
+    min-height: 80vh;
+    justify-content: center;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  section#contact {
+    padding: 4rem clamp(2rem, 5vw, 4rem);
+    min-height: 85vh;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Montserrat:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="medias/petit_icon.png">
+    <title>Portfolio Robin Milanini</title>
+    <script>
+    const form = document.querySelector('.contact-form');
+    const submitBtn = document.querySelector('.btn-submit');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Changement du texte pendant l'envoi
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<span>//</span>ENVOI EN COURS...';
+        submitBtn.disabled = true;
+
+        const formData = new FormData(form);
+
+        try {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+            'Accept': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            submitBtn.innerHTML = '<span>//</span>MESSAGE ENVOYÉ !';
+            submitBtn.style.background = '#008000'; // Vert pour indiquer le succès
+            form.reset(); // Réinitialise les champs du formulaire
+        } else {
+            throw new Error('Erreur lors de l’envoi');
+        }
+        } catch (error) {
+        submitBtn.innerHTML = '<span>//</span>ERREUR, RÉESSAYEZ';
+        submitBtn.style.background = '#cc0000'; // Rouge en cas d'erreur
+        } finally {
+        // Remet le bouton dans son état initial après 4 secondes
+        setTimeout(() => {
+            submitBtn.innerHTML = originalBtnText;
+            submitBtn.style.background = '';
+            submitBtn.disabled = false;
+        }, 4000);
+        }
+    });
+    </script>
+</head>
+<body>
+    <div id="frame">
+        <div id="scroll">
+            <header>
+                <a href="#presentation" aria-label="Accueil" id="logo">&lt;RM/&gt;</a>
+               
+                <nav id="menu" aria-label="Menu principal">
+                    <a href="#presentation"><span>//</span>Présentation</a>
+                    <a href="#competences"><span>//</span>Compétences</a>
+                    <a href="#parcours"><span>//</span>Parcours</a>
+                    <a href="#projets"><span>//</span>Projets</a>
+                    <a href="#contact"><span>//</span>Contact</a>
+                </nav>
+            </header>
+            <main>
+                <section id="presentation">
+                    <div class="badge"><span class="dot"></span><span>//</span>En Recherche d'Alternance</div>
+                    <h1>ROBIN MILANINI<span class="cursor" aria-hidden="true"></span></h1>
+                    <div class="description">
+                        <p><span>//</span>Étudiant en Cybersécurité</p>
+                        <p>Pré-MSc Epitech à Strasbourg</p>
+                        <p>Recherche d'une alternance à partir de janvier 2027</p>
+                    </div>
+                    <div class="cta-buttons">
+                        <a href="cv-robin-milanini.pdf" download><span>//</span>Télécharger le CV</a>
+                        <a href="#contact"><span>//</span>Me contacter</a>
+                    </div>
+                    <div class="hero-bottom-group">
+                        <div class="hero-img-container">
+                            <span class="deco" aria-hidden="true">//</span>
+                            <img src="medias/sans_fond.png" alt="Robin Milanini. Robin porte un costume et une cravate et croise les bras">
+                        </div>
+                        <div class="skills-banner">
+                            <div class="skills-track">
+                                <!-- Groupe 1 -->
+                                <div class="skills-group">
+                                    <span><span class="dot"></span><span>//</span>HTML</span>
+                                    <span><span class="dot"></span><span>//</span>CSS</span>
+                                    <span><span class="dot"></span><span>//</span>Python</span>
+                                    <span><span class="dot"></span><span>//</span>Git</span>
+                                    <span><span class="dot"></span><span>//</span>Framework UI</span>
+                                    <span><span class="dot"></span><span>//</span>Bash scripting</span>
+                                    <span><span class="dot"></span><span>//</span>Linux CLI</span>
+                                    <span><span class="dot"></span><span>//</span>GitHub</span>
+                                </div>
+                                <!-- Groupe 2 (dupliqué pour la boucle infinie) -->
+                                <div class="skills-group" aria-hidden="true">
+                                    <span><span class="dot"></span><span>//</span>HTML</span>
+                                    <span><span class="dot"></span><span>//</span>CSS</span>
+                                    <span><span class="dot"></span><span>//</span>Python</span>
+                                    <span><span class="dot"></span><span>//</span>Git</span>
+                                    <span><span class="dot"></span><span>//</span>Framework UI</span>
+                                    <span><span class="dot"></span><span>//</span>Bash scripting</span>
+                                    <span><span class="dot"></span><span>//</span>Linux CLI</span>
+                                    <span><span class="dot"></span><span>//</span>GitHub</span>
+                                </div>
+                                <div class="skills-group" aria-hidden="true">
+                                    <span><span class="dot"></span><span>//</span>HTML</span>
+                                    <span><span class="dot"></span><span>//</span>CSS</span>
+                                    <span><span class="dot"></span><span>//</span>Python</span>
+                                    <span><span class="dot"></span><span>//</span>Git</span>
+                                    <span><span class="dot"></span><span>//</span>Framework UI</span>
+                                    <span><span class="dot"></span><span>//</span>Bash scripting</span>
+                                    <span><span class="dot"></span><span>//</span>Linux CLI</span>
+                                    <span><span class="dot"></span><span>//</span>GitHub</span>
+                                </div>
+                                <div class="skills-group" aria-hidden="true">
+                                    <span><span class="dot"></span><span>//</span>HTML</span>
+                                    <span><span class="dot"></span><span>//</span>CSS</span>
+                                    <span><span class="dot"></span><span>//</span>Python</span>
+                                    <span><span class="dot"></span><span>//</span>Git</span>
+                                    <span><span class="dot"></span><span>//</span>Framework UI</span>
+                                    <span><span class="dot"></span><span>//</span>Bash scripting</span>
+                                    <span><span class="dot"></span><span>//</span>Linux CLI</span>
+                                    <span><span class="dot"></span><span>//</span>GitHub</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div aria-hidden="true">
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+                </div>
+                <section id="competences">
+                    <!-- Grand // décoratif en arrière-plan -->
+                    <span class="deco-competences" aria-hidden="true">//</span>
+
+                    <h2><span>//</span>Compétences<span class="cursor" aria-hidden="true"></span></h2>
+
+                    <div class="skills-grid">
+                        <div class="skill-card">
+                            <h3><span>//</span>Front-End</h3>
+                            <h4>HTML5 CSS3 Materialize</h4>
+                            <ul>
+                                <li><span>&gt;</span> Sémantique</li>
+                                <li><span>&gt;</span> Responsive</li>
+                                <li><span>&gt;</span> Flexbox</li>
+                                <li><span>&gt;</span> Animations</li>
+                            </ul>
+                        </div>
+
+                        <div class="skill-card">
+                            <h3><span>//</span>Python</h3>
+                            <h4>Python CLI PIP</h4>
+                            <ul>
+                                <li><span>&gt;</span> Algorithmique</li>
+                                <li><span>&gt;</span> Structures données</li>
+                                <li><span>&gt;</span> Fichier & CLI</li>
+                                <li><span>&gt;</span> Récursivité</li>
+                            </ul>
+                        </div>
+
+                        <div class="skill-card">
+                            <h3><span>//</span>Linux & Bash</h3>
+                            <h4>Linux Bash Shell</h4>
+                            <ul>
+                                <li><span>&gt;</span> Scripting</li>
+                                <li><span>&gt;</span> Terminal</li>
+                                <li><span>&gt;</span> Fichiers</li>
+                                <li><span>&gt;</span> Automatisation</li>
+                            </ul>
+                        </div>
+
+                        <div class="skill-card">
+                            <h3><span>//</span>Outils</h3>
+                            <h4>Git Github VS Code</h4>
+                            <ul>
+                                <li><span>&gt;</span> Versioning</li>
+                                <li><span>&gt;</span> Débogage</li>
+                                <li><span>&gt;</span> CLI</li>
+                                <li><span>&gt;</span> Dépendances</li>
+                            </ul>
+                        </div>
+
+                        <div class="skill-card">
+                            <h3><span>//</span>Soft Skills</h3>
+                            <ul>
+                                <li><span>&gt;</span> Esprit d'équipe</li>
+                                <li><span>&gt;</span> Communication</li>
+                                <li><span>&gt;</span> Adaptabilité</li>
+                                <li><span>&gt;</span> Créativité</li>
+                                <li><span>&gt;</span> Rigueur</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                <section id="parcours">
+                <!-- Grand // décoratif en arrière-plan (même taille que compétences) -->
+                <span class="deco-parcours" aria-hidden="true">//</span>
+
+                <h2><span>//</span>Parcours<span class="cursor" aria-hidden="true"></span></h2>
+
+                <p class="parcours-intro"><span>//</span>Un parcours atypique, de l'industrie pharmaceutique à la communication, qui m'a appris à m'adapter vite, à travailler avec méthode et à garder mon sang-froid.</p>
+
+                <div class="parcours-grid">
+                    <!-- Colonne Expériences -->
+                    <div class="parcours-column">
+                        <h3><span>//</span>Expériences</h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date"><span class="blue-square"></span>Mai 2024 à juin 2025 · Molsheim</div>
+                                <h4><span>//</span>Opérateur de production et formateur, Merck Group</h4>
+                                <p>Conduite de ligne en salle blanche, contrôle qualité et formation des nouveaux arrivants, dans un environnement à procédures strictes.</p>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-date"><span class="blue-square"></span>Nov. à déc. 2022 · Brumath</div>
+                                <h4><span>//</span>Chargé de communication et marketing, Losberger De Boer</h4>
+                                <p>Veille concurrentielle, plan de communication, newsletter et nouveau document RSE.</p>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-date"><span class="blue-square"></span>Mai à juin 2022 · Schirmeck</div>
+                                <h4><span>//</span>Chargé de communication, Office de Tourisme de la vallée de la Bruche</h4>
+                                <p>Benchmarking TikTok et Instagram, affiches, événements et vidéos de promotion.</p>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-date"><span class="blue-square"></span>2020 à 2022</div>
+                                <h4><span>//</span>Stages en communication, Studio7 et Centre équestre des deux rives</h4>
+                                <p>Chartes graphiques, refonte de site internet et supports de communication.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Colonne Formation -->
+                    <div class="parcours-column">
+                        <h3><span>//</span>Formation</h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date"><span class="blue-square"></span>Depuis septembre 2026</div>
+                                <h4><span>//</span>Pré-MSc Epitech, Strasbourg</h4>
+                                <p>Pédagogie par projets avant une spécialisation en cybersécurité. Au programme : site JobBoard en architecture 3-tier, application Redditech avec OAuth2 et API REST, CI/CD avec Jenkins.</p>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-date"><span class="blue-square"></span>2021 à 2023</div>
+                                <h4><span>//</span>BTS Communication, Lycée René Cassin, Strasbourg</h4>
+                                <p>Analyse de marché et de la concurrence, gestion de projets, de budgets et de délais.</p>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-date"><span class="blue-square"></span>2018 à 2020</div>
+                                <h4><span>//</span>DUT MMI, IUT Saint-Dié</h4>
+                                <p>Cahiers des charges, conception de sites et d'applications (HTML, CSS, JavaScript, PHP), première approche des réseaux.</p>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-date"><span class="blue-square"></span>Avril 2019</div>
+                                <h4><span>//</span>5 jours pour entreprendre, CCI Campus Alsace</h4>
+                                <p>Business plan, financement, stratégie commerciale et obligations légales.</p>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-date"><span class="blue-square"></span>2014 à 2017</div>
+                                <h4><span>//</span>Bac Pro RPIP, Lycée Gutenberg</h4>
+                                <p>Chaîne graphique print et web, mention assez bien.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </section>
+                <section id="projets">
+                    <!-- Grand // décoratif en arrière-plan -->
+                    <span class="deco-projets" aria-hidden="true">//</span>
+
+                    <h2><span>//</span>Projets<span class="cursor" aria-hidden="true"></span></h2>
+
+                    <!-- Séparateur / En-tête de catégorie -->
+                    <div class="projects-divider">
+                        <span>Projets scolaires</span>
+                    </div>
+
+                    <!-- Grille de projets scolaires -->
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <h3><span>//</span>PORTFOLIO [RM]</h3>
+                            <p>Site personnel mobile first avec animations de frappe et boutons en slide.</p>
+                            <div class="project-tags">HTML · CSS · JavaScript</div>
+                        </div>
+
+                        <div class="project-card">
+                            <h3><span>//</span>WORD GUESSING GAME</h3>
+                            <p>Jeu de devinette développé en Python depuis le terminal : sélection aléatoire d'un mot dans une liste externe et gestion des tentatives du joueur.</p>
+                            <div class="project-tags">Python · CLI · File I/O · Random</div>
+                        </div>
+                    </div>
+                </section>
+                <section id="contact">
+                    <!-- Grand // blanc décoratif en arrière-plan -->
+                    <span class="deco-contact" aria-hidden="true">//</span>
+
+                    <h2><span>//</span>CONTACT<span class="cursor cursor-white" aria-hidden="true"></span></h2>
+
+                    <p class="contact-intro"><span>//</span>Disponible pour une alternance à partir de janvier 2027, en Analyse SOC, DevSecOps ou GRC. Écris-moi ou télécharge mon CV.</p>
+
+                    <form action="https://formsubmit.co/ajax/664f851e49f1f4bc5640a138bf60586f" method="post" class="contact-form">
+                        <div class="form-group">
+                            <label for="name"><span>//</span>Nom</label>
+                            <input id="name" name="name" autocomplete="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email"><span>//</span>Email</label>
+                            <input id="email" type="email" name="email" autocomplete="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message"><span>//</span>Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit"><span>//</span>ENVOYER</button>
+                    </form>
+
+                    <div class="contact-links">
+                        <a href="medias/CV_Robin_Milanini_Cybersecurite.pdf" download class="btn-link fill"><span>//</span>TÉLÉCHARGER LE CV</a>
+                        <a href="https://www.linkedin.com/in/robin-milanini-22b701175/" target="_blank" rel="noopener" class="btn-link outline"><span>//</span>LINKEDIN</a>
+                        <a href="https://github.com/robinmilanini-byte" target="_blank" rel="noopener" class="btn-link outline"><span>//</span>GITHUB</a>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <footer>
+            <p>@2026 - Robin Milanini</p>
+    </footer>
+</body>
+</html>
