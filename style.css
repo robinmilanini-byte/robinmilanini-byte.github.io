@@ -854,6 +854,121 @@ footer p {
   white-space: nowrap;
 }
 
+/* Les carte de projet sont cliquables et ont un effet de survol */
+.project-card {
+  /* ... autres propriétés ... */
+  cursor: pointer;
+  transition: background-color .3s ease, border-color .3s ease, color .3s ease;
+}
+
+.project-card h3,
+.project-card p,
+.project-tags {
+  transition: color .3s ease;
+}
+
+.project-card:hover {
+  background: var(--b);
+  border-color: var(--b);
+  color: #fff;
+}
+
+.project-card:hover h3,
+.project-card:hover p,
+.project-card:hover .project-tags {
+  color: #fff;
+}
+
+/* Style de la modale / pop-up */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+
+.modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+}
+
+.modal-content {
+  position: relative;
+  z-index: 101;
+  background: var(--g);
+  border: 1px solid #000;
+  padding: 2.5rem 2rem 2rem 2rem;
+  width: 90%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  transform: translateY(20px);
+  transition: transform .3s ease;
+}
+
+.modal.active .modal-content {
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  font-family: 'JetBrains Mono', monospace;
+  cursor: pointer;
+  color: #000;
+  line-height: 1;
+  transition: color .2s;
+}
+
+.modal-close:hover {
+  color: var(--b);
+}
+
+#modal-title {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #000;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+#modal-desc {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #222;
+}
+
+#modal-tags {
+  font-size: 0.85rem;
+  color: var(--b);
+  font-weight: 600;
+}
+
+.modal-content .btn-link {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+
 @media (min-width: 900px) { /* pour les écrans plus grand */
   :root {
     --bordy: 8vmin;
