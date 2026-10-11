@@ -53,32 +53,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const backdrop = document.querySelector('.modal-backdrop');
     const cards = document.querySelectorAll('.project-card');
 
-    cards.forEach(card => {
-        card.addEventListener('click', () => {
-            const title = card.getAttribute('data-title');
-            const desc = card.getAttribute('data-desc');
-            const tags = card.getAttribute('data-tags');
-            const link = card.getAttribute('data-link');
+    if (modal) {
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const title = card.getAttribute('data-title');
+                const desc = card.getAttribute('data-desc');
+                const tags = card.getAttribute('data-tags');
+                const link = card.getAttribute('data-link');
 
-            modalTitle.innerHTML = `<span>//</span>${title}`;
-            modalDesc.textContent = desc;
-            modalTags.textContent = tags;
-            modalLink.href = link;
+                modalTitle.innerHTML = `<span>//</span>${title}`;
+                modalDesc.textContent = desc;
+                modalTags.textContent = tags;
+                modalLink.href = link;
 
-            modal.classList.add('active');
+                modal.classList.add('active');
+            });
         });
-    });
 
-    const closeModal = () => {
-        modal.classList.remove('active');
-    };
+        const closeModal = () => {
+            modal.classList.remove('active');
+        };
 
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-    if (backdrop) backdrop.addEventListener('click', closeModal);
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        if (backdrop) backdrop.addEventListener('click', closeModal);
 
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
-            closeModal();
-        }
-    });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    }
 });
+
+// S'exécute immédiatement si le DOM est prêt, sinon attend
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPortfolio);
+} else {
+    initPortfolio();
+}

@@ -248,13 +248,13 @@
 
                     <!-- Grille de projets scolaires -->
                     <div class="projects-grid">
-                        <div class="project-card" data-title="PORTFOLIO [RM]" data-tags="HTML · CSS · JavaScript" data-link="https://github.com/robinmilanini-byte/robinmilanini-byte.github.io">
+                        <div class="project-card" data-title="PORTFOLIO [RM]" data-desc="Site personnel mobile first conçu avec une attention particulière portée au design minimaliste et brut inspiré du style terminal. Il intègre des animations de frappe en CSS pur, un menu fixe responsive, un formulaire de contact asynchrone fonctionnel et des boutons interactifs en slide." data-tags="HTML · CSS · JavaScript" data-link="https://github.com/robinmilanini-byte/robinmilanini-byte.github.io">
                             <h3><span>//</span>PORTFOLIO [RM]</h3>
                             <p>Site personnel mobile first avec animations de frappe et boutons en slide.</p>
                             <div class="project-tags">HTML · CSS · JavaScript</div>
                         </div>
 
-                        <div class="project-card">
+                        <div class="project-card" data-title="WORD GUESSING GAME" data-desc="Jeu de devinette développé en Python depuis le terminal : sélection aléatoire d'un mot dans une liste externe et gestion des tentatives du joueur." data-tags="Python · CLI · File I/O · Random" data-link="https://github.com/robinmilanini-byte">
                             <h3><span>//</span>WORD GUESSING GAME</h3>
                             <p>Jeu de devinette développé en Python depuis le terminal : sélection aléatoire d'un mot dans une liste externe et gestion des tentatives du joueur.</p>
                             <div class="project-tags">Python · CLI · File I/O · Random</div>
@@ -302,14 +302,17 @@
     </footer>
     <!-- Fenêtre modale pour les détails des projets -->
     <div id="project-modal" class="modal" aria-hidden="true">
-    <div class="modal-backdrop"></div>
-    <div class="modal-content">
-        <button class="modal-close" aria-label="Fermer la fenêtre">&times;</button>
-        <h3 id="modal-title"><span>//</span>Titre du projet</h3>
-        <p id="modal-desc">Description détaillée...</p>
-        <div id="modal-tags" class="project-tags">Tags</div>
-        <a id="modal-link" href="#" target="_blank" rel="noopener" class="btn-link fill"><span>//</span>VOIR LE PROJET</a>
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Fermer la fenêtre">&times;</button>
+            <h3 id="modal-title"><span>//</span>Titre du projet</h3>
+            <p id="modal-desc">Description détaillée...</p>
+            <div id="modal-tags" class="project-tags">Tags</div>
+            <a id="modal-link" href="#" target="_blank" rel="noopener" class="btn-link fill"><span>//</span>VOIR LE PROJET</a>
+        </div>
     </div>
+
+    <!-- Script externe -->
     <script src="script.js"></script>
 </div>
 </body>
