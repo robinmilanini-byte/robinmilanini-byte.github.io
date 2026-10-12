@@ -104,6 +104,78 @@ document.addEventListener('DOMContentLoaded', () => {
         this.className += " active";
     });
     }
+
+    // --- Bannière de compétences dynamique et infinie en JS ---
+    const skillsBanner = document.querySelector('.skills-banner');
+    const skillsTrack = document.querySelector('.skills-track');
+
+    if (skillsBanner && skillsTrack) {
+        // Liste des compétences à afficher dans le bandeau
+        const skills = [
+            "HTML", "CSS", "Python", "Git", "Framework UI", 
+            "Bash scripting", "Linux CLI", "GitHub", "JavaScript"
+        ];
+
+        // --- Bannière de compétences dynamique et infinie en JS ---
+        const skillsBanner = document.querySelector('.skills-banner');
+        const skillsTrack = document.querySelector('.skills-track');
+
+        if (skillsBanner && skillsTrack) {
+            // Liste des compétences à afficher dans le bandeau
+            const skills = [
+                "HTML", "CSS", "Python", "Git", "Framework UI", 
+                "Bash scripting", "Linux CLI", "GitHub", "JavaScript"
+            ];
+
+            // Fonction pour créer un groupe de compétences
+            const createSkillsGroup = () => {
+                const group = document.createElement('div');
+                group.className = 'skills-group';
+                skills.forEach(skill => {
+                    const span = document.createElement('span');
+                    span.innerHTML = `<span class="dot"></span><span>//</span>${skill}`;
+                    group.appendChild(span);
+                });
+                return group;
+            };
+
+            // On génère 4 groupes d'affilée pour avoir assez de largeur et assurer une boucle fluide
+            for (let i = 0; i < 4; i++) {
+                skillsTrack.appendChild(createSkillsGroup());
+            }
+
+            let currentX = 0;
+            const speed = 3; // Vitesse de défilement
+            let isPaused = false;
+
+            // Pause au survol de la souris
+            skillsBanner.addEventListener('mouseenter', () => {
+                isPaused = true;
+            });
+
+            skillsBanner.addEventListener('mouseleave', () => {
+                isPaused = false;
+            });
+
+            function animateBanner() {
+                if (!isPaused) {
+                    currentX -= speed;
+                    const halfWidth = skillsTrack.scrollWidth / 2;
+                    
+                    // Dès qu'on a dépassé la moitié, on remet à 0 en douceur
+                    if (Math.abs(currentX) >= halfWidth) {
+                        currentX = 0;
+                    }
+                    
+                    skillsTrack.style.transform = `translateX(${currentX}px)`;
+                }
+                requestAnimationFrame(animateBanner);
+            }
+
+            // Lancement de l'animation
+            requestAnimationFrame(animateBanner);
+        }
+    }
 });
 
 // S'exécute immédiatement si le DOM est prêt, sinon attend

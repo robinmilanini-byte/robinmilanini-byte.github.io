@@ -314,8 +314,7 @@ section#presentation > div:nth-child(4) a:last-child:hover::before, section#pres
 
 .skills-track {
   display: flex;
-  width: max-content;
-  animation: scroll-banner 15s linear infinite; 
+  width: max-content; 
 }
 
 .skills-group {
