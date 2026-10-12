@@ -98,6 +98,11 @@ nav a {
   transition: color .3s;
 }
 
+/* Bouton active avec javascript */
+.active, .selection:hover {
+  border: 1px solid white;
+}
+
 /* Le rectangle blanc qui glisse au survol */
 nav a::before {
   content: "";
