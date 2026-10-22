@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Gestion de l'affichage de l'image dans la modale
                 if (imgSrc && modalImg) {
                     modalImg.src = imgSrc;
+                    modalImg.alt = `Aperçu du projet ${title}`;
                     modalImg.style.display = 'block';
                 } else if (modalImg) {
                     modalImg.style.display = 'none'; // Masque l'image si le projet n'en a pas

@@ -92,6 +92,7 @@ nav a {
   border: 1px solid transparent;
   color: white;
   text-decoration: none;
+  text-transform: uppercase;
   font-size: clamp(.6rem, 2vw, .85rem);
   letter-spacing: .02em;
   white-space: nowrap;    /* empêche "Présentation" de se couper sur 2 lignes */
@@ -978,6 +979,83 @@ footer p {
 .modal-content .btn-link {
   align-self: flex-start;
   margin-top: 0.5rem;
+}
+
+section#apropos {
+  position: relative;
+  overflow: hidden;
+  padding: 3rem clamp(1rem, 4vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+section#apropos h2 {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(2rem, 8vw, 4rem);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.deco-apropos {
+  position: absolute;
+  z-index: 0;
+  right: -5vw;
+  bottom: -10vw;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 800;
+  font-size: clamp(20rem, 55vw, 65rem);
+  color: var(--b);
+  opacity: 10%;
+  pointer-events: none;
+  user-select: none;
+}
+
+.apropos-container {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.apropos-text, .hobbies-card {
+  background: var(--g);
+  border: 1px solid #000;
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.hobbies-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.hobbies-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+
+.hobbies-card li {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.hobbies-card li span {
+  color: var(--b);
+  font-weight: 800;
 }
 
 @media (min-width: 900px) { /* pour les écrans plus grand */
