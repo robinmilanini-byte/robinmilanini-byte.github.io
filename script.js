@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (form && submitBtn) {
         form.addEventListener('submit', async (e) => {
-        e.preventDefault();
+            e.preventDefault();
 
             // Changement du texte pendant l'envoi
             const originalBtnText = submitBtn.innerHTML;
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     method: 'POST',
                     body: formData,
                     headers: {
-                    'Accept': 'application/json'
+                        'Accept': 'application/json'
                     }
                 });
 
@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Gestion de la modale des projets
     const modal = document.getElementById('project-modal');
     const modalTitle = document.getElementById('modal-title');
+    const modalImg = document.getElementById('modal-img');
     const modalDesc = document.getElementById('modal-desc');
     const modalTags = document.getElementById('modal-tags');
     const modalLink = document.getElementById('modal-link');
@@ -60,8 +61,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 const desc = card.getAttribute('data-desc');
                 const tags = card.getAttribute('data-tags');
                 const link = card.getAttribute('data-link');
+                const imgSrc = card.getAttribute('data-img');
 
                 modalTitle.innerHTML = `<span>//</span>${title}`;
+
+                // Gestion de l'affichage de l'image dans la modale
+                if (imgSrc && modalImg) {
+                    modalImg.src = imgSrc;
+                    modalImg.style.display = 'block';
+                } else if (modalImg) {
+                    modalImg.style.display = 'none'; // Masque l'image si le projet n'en a pas
+                }
+
                 modalDesc.textContent = desc;
                 modalTags.textContent = tags;
                 modalLink.href = link;
@@ -84,97 +95,120 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    //Active nav
-    // Get the container element
-    var btnContainer = document.getElementById("menu");
+    // Active nav & ScrollSpy dynamique
+    const btnContainer = document.getElementById("menu");
 
-    // Get all buttons with class="btn" inside the container
-    var btns = btnContainer.getElementsByClassName("selection");
-    // Loop through the buttons and add the active class to the current/clicked button
-    for (var i = 0; i < btns.length; i++) {
-    btns[i].addEventListener("click", function() {
-        var current = document.getElementsByClassName("active");
+    if (btnContainer) {
+        const btns = btnContainer.getElementsByClassName("selection");
 
-        // If there's no active class
-        if (current.length > 0) {
-        current[0].className = current[0].className.replace(" active", "");
+        // Gestion au clic
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function () {
+                var current = btnContainer.getElementsByClassName("active");
+                if (current.length > 0) {
+                    current[0].className = current[0].className.replace(" active", "");
+                }
+                this.className += " active";
+            });
         }
 
-        // Add the active class to the current/clicked button
-        this.className += " active";
-    });
+        // Gestion dynamique au défilement (IntersectionObserver)
+        const sections = document.querySelectorAll("main section[id]");
+
+        const observerOptions = {
+            root: null,
+            // Déclenche le changement quand la section atteint le tiers supérieur de l'écran
+            rootMargin: "-30% 0px -50% 0px",
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute("id");
+                    
+                    // Parcourt tous les boutons du menu
+                    Array.from(btns).forEach(btn => {
+                        btn.classList.remove("active");
+                        // Si le href du bouton correspond à l'ID de la section visible
+                        if (btn.getAttribute("href") === `#${id}`) {
+                            btn.classList.add("active");
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe chaque section de la page principale
+        sections.forEach(section => {
+            observer.observe(section);
+        });
     }
 
-    // --- Bannière de compétences dynamique et infinie en JS ---
+    // Bannière de compétences dynamique et infinie en JS
     const skillsBanner = document.querySelector('.skills-banner');
     const skillsTrack = document.querySelector('.skills-track');
 
     if (skillsBanner && skillsTrack) {
         // Liste des compétences à afficher dans le bandeau
         const skills = [
-            "HTML", "CSS", "Python", "Git", "Framework UI", 
-            "Bash scripting", "Linux CLI", "GitHub", "JavaScript"
+            "HTML5", 
+            "CSS3", 
+            "Python", 
+            "Java", 
+            "Git", 
+            "Materialize CSS", 
+            "Bash Scripting", 
+            "Linux CLI", 
+            "GitHub", 
+            "Algorithmique"
         ];
 
-        // --- Bannière de compétences dynamique et infinie en JS ---
-        const skillsBanner = document.querySelector('.skills-banner');
-        const skillsTrack = document.querySelector('.skills-track');
-
-        if (skillsBanner && skillsTrack) {
-            // Liste des compétences à afficher dans le bandeau
-            const skills = [
-                "HTML", "CSS", "Python", "Git", "Framework UI", 
-                "Bash scripting", "Linux CLI", "GitHub", "JavaScript"
-            ];
-
-            // Fonction pour créer un groupe de compétences
-            const createSkillsGroup = () => {
-                const group = document.createElement('div');
-                group.className = 'skills-group';
-                skills.forEach(skill => {
-                    const span = document.createElement('span');
-                    span.innerHTML = `<span class="dot"></span><span>//</span>${skill}`;
-                    group.appendChild(span);
-                });
-                return group;
-            };
-
-            // On génère 4 groupes d'affilée pour avoir assez de largeur et assurer une boucle fluide
-            for (let i = 0; i < 4; i++) {
-                skillsTrack.appendChild(createSkillsGroup());
-            }
-
-            let currentX = 0;
-            const speed = 3; // Vitesse de défilement
-            let isPaused = false;
-
-            // Pause au survol de la souris
-            skillsBanner.addEventListener('mouseenter', () => {
-                isPaused = true;
+        // Fonction pour créer un groupe de compétences
+        const createSkillsGroup = () => {
+            const group = document.createElement('div');
+            group.className = 'skills-group';
+            skills.forEach(skill => {
+                const span = document.createElement('span');
+                span.innerHTML = `<span class="dot"></span><span>//</span>${skill}`;
+                group.appendChild(span);
             });
+            return group;
+        };
 
-            skillsBanner.addEventListener('mouseleave', () => {
-                isPaused = false;
-            });
+        // On génère 4 groupes d'affilée pour avoir assez de largeur et assurer une boucle fluide
+        for (let i = 0; i < 4; i++) {
+            skillsTrack.appendChild(createSkillsGroup());
+        }
 
-            function animateBanner() {
-                if (!isPaused) {
-                    currentX -= speed;
-                    const halfWidth = skillsTrack.scrollWidth / 2;
-                    
-                    // Dès qu'on a dépassé la moitié, on remet à 0 en douceur
-                    if (Math.abs(currentX) >= halfWidth) {
-                        currentX = 0;
-                    }
-                    
-                    skillsTrack.style.transform = `translateX(${currentX}px)`;
+        let currentX = 0;
+        const speed = 3; // Vitesse de défilement
+        let isPaused = false;
+
+        // Pause au survol de la souris
+        skillsBanner.addEventListener('mouseenter', () => {
+            isPaused = true;
+        });
+
+        skillsBanner.addEventListener('mouseleave', () => {
+            isPaused = false;
+        });
+
+        function animateBanner() {
+            if (!isPaused) {
+                currentX -= speed;
+                const halfWidth = skillsTrack.scrollWidth / 2;
+
+                // Dès qu'on a dépassé la moitié, on remet à 0 en douceur
+                if (Math.abs(currentX) >= halfWidth) {
+                    currentX = 0;
                 }
-                requestAnimationFrame(animateBanner);
-            }
 
-            // Lancement de l'animation
+                skillsTrack.style.transform = `translateX(${currentX}px)`;
+            }
             requestAnimationFrame(animateBanner);
         }
+        animateBanner();
     }
 });
 
