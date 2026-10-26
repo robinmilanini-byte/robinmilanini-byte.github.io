@@ -297,7 +297,6 @@ section#presentation > div:nth-child(4) a:last-child:hover::before, section#pres
   max-width: 75%;
   height: auto;
   display: block;
-  margin-bottom: -1px;
 }
 
 /* BANDEAU DE COMPÉTENCES DÉFILANT */
@@ -1014,15 +1013,16 @@ section#apropos h2 {
   user-select: none;
 }
 
+/* Section À propos & Cartes de passions */
 .apropos-container {
   position: relative;
   z-index: 2;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.apropos-text, .hobbies-card {
+.apropos-text {
   background: var(--g);
   border: 1px solid #000;
   padding: 1.8rem;
@@ -1033,32 +1033,60 @@ section#apropos h2 {
   line-height: 1.6;
 }
 
-.hobbies-card h3 {
+.apropos-text p {
   margin: 0;
-  font-size: 1.1rem;
 }
 
-.hobbies-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.hobbies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.hobby-card {
+  background: var(--g);
+  border: 1px solid #000;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: .6rem;
+  transition: transform .3s ease, background-color .3s ease, border-color .3s ease;
 }
 
-.hobbies-card li {
-  display: flex;
-  align-items: center;
-  gap: .5rem;
+.hobby-card:hover {
+  transform: translateY(-3px);
+  background: var(--b);
+  border-color: var(--b);
 }
 
-.hobbies-card li span {
+.hobby-card:hover h3,
+.hobby-card:hover p,
+.hobby-card:hover .hobby-icon {
+  color: #fff;
+}
+
+.hobby-icon {
   color: var(--b);
-  font-weight: 800;
+  margin-bottom: 2px;
+  transition: color .3s ease;
 }
 
-@media (min-width: 900px) { /* pour les écrans plus grand */
+.hobby-card h3 {
+  margin: 0;
+  font-size: .95rem;
+  color: #000;
+  transition: color .3s ease;
+}
+
+.hobby-card p {
+  margin: 0;
+  font-size: .85rem;
+  line-height: 1.4;
+  color: #333;
+  transition: color .3s ease;
+}
+
+@media (min-width: 1100px) { /* pour les écrans plus grand */
   :root {
     --bordy: 8vmin;
     --bordx: 8vmin;
@@ -1068,17 +1096,25 @@ section#apropos h2 {
     border-color: #666;
   }
 
-  nav {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-
   header {
     margin-top: 2vw;
     margin-left: 2vw;
     margin-right: 2vw;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+  }
+
+  #logo {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  nav {
+    grid-column: 2;
+    justify-self: center;
+    position: static;
+    transform: none;
   }
 
   #logo::before {
@@ -1117,7 +1153,7 @@ section#apropos h2 {
     position: absolute;
     bottom: 5vw;
     top: auto;
-    right: 0vw;        
+    right: 2vw;        
     transform: none;
     width: auto;
     height: 90%;
@@ -1133,13 +1169,13 @@ section#apropos h2 {
     width: auto;
     max-width: none;
     object-fit: contain;
-    margin-bottom: -1rem;
+    margin-bottom: -2rem;
   }
 
   .deco {
     position: absolute;
     z-index: 1;
-    right: 0vw;
+    right: -4vw;
     bottom: 0;
     top: auto;
     transform: none;
