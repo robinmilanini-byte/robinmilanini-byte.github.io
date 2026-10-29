@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentions Légales | Robin Milanini</title>
+    <meta name="robots" content="noindex, follow">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Montserrat:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="medias/petit_icon.png">
+
+    <style>
+        .legal-page {
+            padding: 3rem clamp(1rem, 4vw, 3rem);
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .legal-page h1 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            margin: 0;
+            color: #000;
+        }
+
+        .legal-card {
+            background: var(--g);
+            border: 1px solid #000;
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .legal-card h2 {
+            font-size: 1.2rem;
+            margin: 0;
+            color: var(--b);
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+        }
+
+        .legal-card p, .legal-card ul {
+            margin: 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #222;
+        }
+
+        .legal-card ul {
+            padding-left: 1.2rem;
+        }
+
+        .btn-back {
+            align-self: flex-start;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="frame">
+        <div id="scroll">
+            <header>
+                <a href="index.html" aria-label="Accueil" id="logo">&lt;RM/&gt;</a>
+                <nav id="menu" aria-label="Menu principal">
+                    <a href="index.html" class="selection"><span>//</span>Retour au Portfolio</a>
+                </nav>
+            </header>
+
+            <main class="legal-page">
+                <a href="index.html" class="btn-link fill btn-back"><span>//</span>&lt; RETOUR À L'ACCUEIL</a>
+
+                <h1><span>//</span>MENTIONS LÉGALES</h1>
+
+                <!-- 1. Éditeur -->
+                <article class="legal-card">
+                    <h2><span>//</span>1. Éditeur du site</h2>
+                    <p>Le présent site est édité et géré par :</p>
+                    <p>
+                        <strong>Robin Milanini</strong><br>
+                        Étudiant en Informatique (Pré-MSc Epitech Strasbourg)<br>
+                        Localisation : Strasbourg, France<br>
+                        Contact Email : <a href="mailto:robin.milanini@gmail.com" style="color: var(--b);">robin.milanini@gmail.com</a>
+                    </p>
+                </article>
+
+                <!-- 2. Hébergeur -->
+                <article class="legal-card">
+                    <h2><span>//</span>2. Hébergement</h2>
+                    <p>Ce site est hébergé à titre gracieux par le service GitHub Pages :</p>
+                    <p>
+                        <strong>GitHub Inc.</strong><br>
+                        88 Colin P. Kelly Jr. St.<br>
+                        San Francisco, CA 94107, États-Unis<br>
+                        Site Web : <a href="https://pages.github.com" target="_blank" rel="noopener" style="color: var(--b);">https://pages.github.com</a>
+                    </p>
+                </article>
+
+                <!-- 3. Propriété intellectuelle -->
+                <article class="legal-card">
+                    <h2><span>//</span>3. Propriété intellectuelle</h2>
+                    <p>L'ensemble du contenu présent sur ce site (textes, éléments graphiques, photographies, icônes, code source) est la propriété exclusive de Robin Milanini, sauf mention contraire.</p>
+                    <p>Toute reproduction, distribution, modification ou publication de ces différents éléments est strictement interdite sans l'accord écrit préalable de l'auteur.</p>
+                </article>
+
+                <!-- 4. Données personnelles & Formulaire -->
+                <article class="legal-card">
+                    <h2><span>//</span>4. Données personnelles & Contact</h2>
+                    <p>Les informations recueillies via le formulaire de contact (Nom, Email, Sujet, Message) sont transmises en toute sécurité au service tier <strong>Formspree</strong> afin de permettre la réception des messages dans ma boîte e-mail personnelle.</p>
+                    <ul>
+                        <li>Aucune donnée personnelle n'est vendue, cédée ou utilisée à des fins commerciales.</li>
+                        <li>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification et de suppression des données vous concernant en me contactant directement par e-mail.</li>
+                    </ul>
+                </article>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <p>@2026 - Robin Milanini · Mentions Légales</p>
+    </footer>
+</body>
+</html>
