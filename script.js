@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (form && submitBtn) {
     form.addEventListener("submit", async (e) => {
-      //e.preventDefault();
+      e.preventDefault();
 
       // Changement du texte pendant l'envoi
       const originalBtnText = submitBtn.innerHTML;
