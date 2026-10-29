@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector(".contact-form");
   const submitBtn = document.querySelector(".btn-submit");
 
+  /*
   if (form && submitBtn) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -42,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+    */
 
   // Gestion de la modale des projets
   const modal = document.getElementById("project-modal");
