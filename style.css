@@ -195,6 +195,13 @@ h1 {
   50% { opacity: 0; }
 }
 
+/* Tags de présentation (Alternance) */
+.presentation-tags {
+  position: relative;
+  z-index: 1;
+  font-size: .85rem;
+}
+
 /* Sous-titre */
 section#presentation > div:nth-child(3) {
   position: relative;
@@ -209,7 +216,7 @@ section#presentation > div:nth-child(3) p {
 }
 
 /* Boutons */
-section#presentation > div:nth-child(4) {
+section#presentation > div:nth-child(5) {
   position: relative;
   z-index: 1;
   display: flex;
@@ -217,7 +224,7 @@ section#presentation > div:nth-child(4) {
   gap: 1rem;
 }
 
-section#presentation > div:nth-child(4) a {
+section#presentation > div:nth-child(5) a {
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -229,7 +236,7 @@ section#presentation > div:nth-child(4) a {
   transition: color .3s;
 }
 
-section#presentation > div:nth-child(4) a::before {
+section#presentation > div:nth-child(5) a::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -240,37 +247,37 @@ section#presentation > div:nth-child(4) a::before {
 }
 
 /* Bouton plein : "Télécharger le CV" */
-section#presentation > div:nth-child(4) a:first-child {
+section#presentation > div:nth-child(5) a:first-child {
   background: var(--b);
   color: #fff;
 }
 
-section#presentation > div:nth-child(4) a:first-child::before { 
+section#presentation > div:nth-child(5) a:first-child::before { 
   background: var(--g); 
 }
 
-section#presentation > div:nth-child(4) a:first-child:hover, section#presentation > div:nth-child(4) a:first-child:focus-visible { 
+section#presentation > div:nth-child(5) a:first-child:hover, section#presentation > div:nth-child(5) a:first-child:focus-visible { 
   color: #000; 
 }
 
-section#presentation > div:nth-child(4) a:first-child:hover::before, section#presentation > div:nth-child(4) a:first-child:focus-visible::before { 
+section#presentation > div:nth-child(5) a:first-child:hover::before, section#presentation > div:nth-child(5) a:first-child:focus-visible::before { 
   transform: scaleX(1); transform-origin: left; 
 }
 
 /* Bouton contour : "Me contacter" */
-section#presentation > div:nth-child(4) a:last-child {
+section#presentation > div:nth-child(5) a:last-child {
   color: #000;
 }
 
-section#presentation > div:nth-child(4) a:last-child::before { 
+section#presentation > div:nth-child(5) a:last-child::before { 
   background: var(--b); 
 }
 
-section#presentation > div:nth-child(4) a:last-child:hover, section#presentation > div:nth-child(4) a:last-child:focus-visible { 
+section#presentation > div:nth-child(5) a:last-child:hover, section#presentation > div:nth-child(5) a:last-child:focus-visible { 
   color: #fff; 
 }
 
-section#presentation > div:nth-child(4) a:last-child:hover::before, section#presentation > div:nth-child(4) a:last-child:focus-visible::before { 
+section#presentation > div:nth-child(5) a:last-child:hover::before, section#presentation > div:nth-child(5) a:last-child:focus-visible::before { 
   transform: scaleX(1); transform-origin: left; 
 }
 
@@ -430,7 +437,7 @@ section#competences h2 {
   gap: .5rem;
 }
 
-.skill-card li span {
+.skill-card li > span:first-child {
   color: var(--b);
   font-weight: 800;
 }
@@ -452,6 +459,11 @@ section#parcours h2 {
   display: flex;
   align-items: center;
   gap: .4rem;
+}
+
+/* Rend le curseur de frappe blanc dans la section contact */
+section#contact .cur {
+  background: #fff;
 }
 
 /* Grand // bleu en fond (exactement identiques aux compétences) */
@@ -738,7 +750,7 @@ section#contact h2 {
   border: none;
   padding: .8rem 1.8rem;
   font-family: 'JetBrains Mono', monospace;
-  font-weight: 700;
+  font-weight: 800;
   font-size: .85rem;
   cursor: pointer;
   transition: opacity .3s;
@@ -758,13 +770,12 @@ section#contact h2 {
   margin-top: 1rem;
 }
 
-.btn-submit,
-.btn-link {
+.btn-submit {
   position: relative;
   isolation: isolate;
   overflow: hidden;
   font-family: 'JetBrains Mono', monospace;
-  font-weight: 700;
+  font-weight: 800;
   font-size: .85rem;
   text-decoration: none;
   display: inline-flex;
@@ -772,6 +783,49 @@ section#contact h2 {
   gap: .3rem;
   transition: color .3s;
   cursor: pointer;
+}
+
+.btn-link {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 300;
+  font-size: .85rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  transition: color .3s;
+  cursor: pointer;
+}
+
+/* Appliquer le style des inputs et textareas au select */
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  padding: .8rem 1rem;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .9rem;
+  outline: none;
+  transition: border-color .3s;
+}
+
+/* Style de l'état focus pour le select */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #fff;
+}
+
+/* Style des options du menu déroulant (pour qu'elles gardent un fond sombre lisible) */
+.form-group select option {
+  background-color: white;
+  color: var(--b);
 }
 
 .btn-submit::before,
@@ -793,7 +847,7 @@ section#contact h2 {
   transform-origin: left;
 }
 
-/* 1. Bouton "ENVOYER" & Bouton plein "TÉLÉCHARGER LE CV" */
+/* Bouton "ENVOYER" & Bouton plein "TÉLÉCHARGER LE CV" */
 .btn-submit,
 .btn-link.fill {
   background: #fff;
@@ -814,7 +868,7 @@ section#contact h2 {
   color: #fff;
 }
 
-/* 2. Boutons contours "LINKEDIN" & "GITHUB" */
+/* Boutons contours "LINKEDIN" & "GITHUB" */
 .contact-links {
   position: relative;
   z-index: 2;
@@ -1086,6 +1140,32 @@ section#apropos h2 {
   transition: color .3s ease;
 }
 
+/* Curseur de frappe (différent du .cursor décoratif déjà présent) */
+.cur {
+  display: none;
+  width: .3em;
+  height: .8em;
+  margin-left: .2em;
+  background: var(--b);
+  vertical-align: -.05em;
+}
+.done .cur {
+  display: inline-block;
+  animation: blink 1s steps(1) infinite;   /* réutilise ton @keyframes blink existant */
+}
+
+.h {
+  visibility: hidden;
+}
+
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
 @media (min-width: 1100px) { /* pour les écrans plus grand */
   :root {
     --bordy: 8vmin;
@@ -1140,7 +1220,7 @@ section#apropos h2 {
 
   section#presentation > div:first-child,
   section#presentation > div:nth-child(3),
-  section#presentation > div:nth-child(4) {
+  section#presentation > div:nth-child(5) {
     max-width: 55%;
   }
 
