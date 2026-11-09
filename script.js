@@ -278,3 +278,25 @@ const io = new IntersectionObserver(
 );
 
 document.querySelectorAll("main section").forEach((s) => io.observe(s));
+
+// --- IntersectionObserver pour les animations Fade In Up ---
+  const fadeInUpElements = document.querySelectorAll('.fade-in-up');
+
+  if (fadeInUpElements.length > 0) {
+    const fadeObserverOptions = {
+      root: document.getElementById('scroll'), // Utilise le conteneur scrollable du portfolio
+      rootMargin: '0px 0px -50px 0px',
+      threshold: 0.15
+    };
+
+    const fadeObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // Ne re-déclenche pas une fois animé
+        }
+      });
+    }, fadeObserverOptions);
+
+    fadeInUpElements.forEach((el) => fadeObserver.observe(el));
+  }

@@ -1166,6 +1166,27 @@ section#apropos h2 {
   clip: rect(0 0 0 0);
 }
 
+/* --- ANIMATION FADE IN UP --- */
+
+/* État initial : invisible et décalé vers le bas */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+
+/* État visible : position normale et opacité pleine */
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Optionnel : Delais progressifs pour des effets en cascade */
+.delay-1 { transition-delay: 0.15s; }
+.delay-2 { transition-delay: 0.3s; }
+.delay-3 { transition-delay: 0.45s; }
+
 @media (min-width: 1100px) { /* pour les écrans plus grand */
   :root {
     --bordy: 8vmin;
