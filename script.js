@@ -153,15 +153,18 @@ document.addEventListener("DOMContentLoaded", () => {
   if (skillsBanner && skillsTrack) {
     // Liste des compétences à afficher dans le bandeau
     const skills = [
-      "HTML5",
-      "CSS3",
       "Python",
       "Java",
-      "Git",
-      "Materialize CSS",
+      "JavaScript",
+      "Linux",
+      "SQL / PostgreSQL",
+      "Docker",
+      "Git / GitHub",
+      "Node.js / Express",
+      "API REST",
       "Bash Scripting",
-      "Linux CLI",
-      "GitHub",
+      "HTML5 / CSS3",
+      "POO",
       "Algorithmique",
     ];
 
